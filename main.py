@@ -95,33 +95,12 @@ class LoginTests(unittest.TestCase):
             tweet = self.wait.until(EC.presence_of_element_located((By.XPATH, "//article[@data-testid='tweet']")))
             like_button = tweet.find_element(By.XPATH, ".//button[@data-testid='like']")
             like_button.click()
-     
-            
-
-        
         except Exception as e:
             self.fail(f"El test de dar like falló: {str(e)}")
         
 
-    def test_delete_tweet(self):
-        self.login("yeraldsony5@gmail.com", "yerald_dev", "YeraldklkGG120")
+   
 
-        try:
-            self.driver.get("https://x.com/home")
-            tweet = self.wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='tweet de test automizado.']/ancestor::article")))
-            tweet_menu_button = tweet.find_element(By.XPATH, ".//div[@data-testid='caret']")
-            tweet_menu_button.click()
-            
-            delete_button = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Delete']")))
-            delete_button.click()
-
-            confirm_delete_button = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Delete']")))
-            confirm_delete_button.click()
-
-            self.wait.until(EC.invisibility_of_element(tweet))
-        
-        except Exception as e:
-            self.fail(f"El test de eliminar tweet falló: {str(e)}")
 
 
     def test_follow_user(self):
@@ -144,7 +123,28 @@ class LoginTests(unittest.TestCase):
         except Exception as e:
             self.fail(f"El test de seguir usuario falló: {str(e)}")
 
-    
+
+
+    def test_delete_tweet(self):
+        self.login("yeraldsony5@gmail.com", "yerald_dev", "YeraldklkGG120")
+
+        try:
+            self.driver.get("https://x.com/home")
+            tweet = self.wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='tweet de test automizado.']/ancestor::article")))
+            tweet_menu_button = tweet.find_element(By.XPATH, ".//div[@data-testid='caret']")
+            tweet_menu_button.click()
+            
+            delete_button = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Delete']")))
+            delete_button.click()
+
+            confirm_delete_button = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Delete']")))
+            confirm_delete_button.click()
+
+            self.wait.until(EC.invisibility_of_element(tweet))
+        
+        except Exception as e:
+            self.fail(f"El test de eliminar tweet falló: {str(e)}")
+
 
 if __name__ == "__main__":
     unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='reportes'))
